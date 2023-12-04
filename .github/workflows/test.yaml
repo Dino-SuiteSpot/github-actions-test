@@ -12,18 +12,17 @@ jobs:
   testa:
     strategy:
       matrix:
-        package: ${{ fromJSON('["A", "B", "C"]') }}
+        package: [A, B, C]
     runs-on: ubuntu-latest
     steps:
-    # output what you want, the output of package B will be available in needs for furture jobs
-    - run: echo "MyKey=MyOutput" > $GITHUB_OUTPUT
-      id: mystep
-      if: matrix.package == 'B' 
+      # output what you want, the output of package B will be available in needs for furture jobs
+      - run: echo ${{ matrix.package}}
+        id: mystep
     outputs:
-      B: ${{ steps.mystep.outputs.mykey || '' }}
+      X: ${{ matrix.package }}
   testb:
     runs-on: ubuntu-latest
     needs: testa
     steps:
-    - run: ${{ tojson(needs) }}
-      shell: cat {0}
+      - run: ${{ tojson(needs) }}
+        shell: cat {0}
