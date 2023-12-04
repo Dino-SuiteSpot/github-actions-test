@@ -24,5 +24,5 @@ jobs:
     runs-on: ubuntu-latest
     needs: testa
     steps:
-      - run: ${{ needs.testa.outputs }}
+      - run: ${{ needs.testa.outputs.project }}
         shell: cat {0}
