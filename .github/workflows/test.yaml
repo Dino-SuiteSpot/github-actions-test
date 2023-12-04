@@ -19,10 +19,9 @@ jobs:
       - run: echo "${{matrix.package}}=true" > $GITHUB_OUTPUT
         id: mystep
     outputs:
-      project: ${{ steps.mystep.outputs.mykey }}
+      project: ${{ toJson(steps.mystep.outputs) }}
   testb:
     runs-on: ubuntu-latest
     needs: testa
     steps:
-      - run: ${{ tojson(needs.testa.outputs) }}
-        shell: cat {0}
+      - run: echo ${{ needs.testa.outputs.project }}
