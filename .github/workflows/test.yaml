@@ -16,8 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: aws s3api head-object --bucket
-        continue-on-error: true
       - run: echo 1
-        if: success()
+        if: failure()
       - run: echo 2
-        working-directory: ./dist/apps
