@@ -17,5 +17,5 @@ jobs:
     steps:
       - run: aws s3api head-object --bucket
       - run: echo 1
-        if: failure()
+        if: ${{ failure() }}
       - run: echo 2
